@@ -58,13 +58,17 @@ function loginUser() {
       }
     });
 }
-
+//Vérifie si une chaîne de caractères est une adresse e-mail valide en utilisant une expression régulière (RegEx).
 function isMailValid(email) {
-  return String(email)
-    .toLowerCase()
-    .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
+  return (
+    String(email)
+      .toLowerCase()
+      // 2. Utilise la méthode `.match()` pour comparer l'e-mail à une expression régulière.
+
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      )
+  );
 }
 /** afficher msg erreur sur web: get element pr recuperer login erreur de dom puis remplacer login erreur par msg erreur enfin configurer css  */
 function showError(message) {

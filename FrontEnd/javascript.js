@@ -56,6 +56,7 @@ function updateWorks(showWorkOnModal) {
     }
   }
 }
+//Crée et affiche un élément de travail (image et titre) dans une galerie.
 
 function showWork(work, showWorkOnModal) {
   let gallery = getWorksGallery(showWorkOnModal);
@@ -77,7 +78,7 @@ function showWork(work, showWorkOnModal) {
 
   gallery.appendChild(figure);
 }
-
+//Récuperation des catégories
 function fetchCATEGORIES() {
   fetch(CATEGORY_API)
     .then((reponse) => reponse.json())
@@ -98,7 +99,7 @@ function fetchCATEGORIES() {
       selectCategory(nouvelleCategorie.id);
     });
 }
-
+//Création de boutons pour les filtres
 function createFilterButton(category, filtersZone) {
   let categoryLink = document.createElement("a");
   categoryLink.id = category.id;
@@ -112,15 +113,19 @@ function createFilterButton(category, filtersZone) {
     selectCategory(category.id);
   });
 }
+//Met à jour la catégorie sélectionnée et affiche les travaux correspondants.
 
 function selectCategory(categoryId) {
   document.getElementById(selectCategoryId).classList.remove("selected");
-
+  // 1. Désélectionne l'ancienne catégorie en retirant la classe "selected".
   document.getElementById(categoryId).classList.add("selected");
+  // 2. Sélectionne la nouvelle catégorie en lui ajoutant la classe "selected".
 
   selectCategoryId = categoryId;
   updateWorks();
 }
+
+//Vérifie si l'utilisateur est connecté et met à jour l'interface en conséquence.
 
 function check_login_logout() {
   let token = sessionStorage.getItem("token");
@@ -156,7 +161,7 @@ function check_login_logout() {
     });
   }
 }
-
+//Creation de bouton de suppression
 function createDeleteButton(figure, work) {
   let button = document.createElement("i");
   button.classList.add("fa-regular", "fa-trash-can");

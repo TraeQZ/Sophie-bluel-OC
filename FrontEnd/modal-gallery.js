@@ -20,8 +20,11 @@ const OPEN_MODAL = function (e) {
 
 //FONCTION FERMETURE BOITE MODALE
 const CLOSE_MODAL = function (e) {
-  if (modal == null) return;
+  if (modal == null) return; // S'il n'y a pas de modale à fermer, la fonction s'arrête.
+
   //SI ON CLIQUE SUR AUTRE CHOSE QUE LA MODALE OU LE BOUTON ON NE VEUT PAS FERMER
+  // Empêche la modale de se fermer si l'utilisateur clique à l'intérieur de celle-ci, sur le bouton de fermeture, ou sur l'icône de fermeture.
+  // Cela permet de ne pas fermer la modale si l'utilisateur clique accidentellement sur le contenu.
   if (
     e.target != modal &&
     e.target != BUTTON_CLOSE &&
@@ -29,7 +32,7 @@ const CLOSE_MODAL = function (e) {
   )
     return;
 
-  e.preventDefault;
+  e.preventDefault; // Empêche le comportement par défaut de l'événement (par exemple, le rechargement de la page si un lien est cliqué).
   modal.style.display = "none";
 };
 

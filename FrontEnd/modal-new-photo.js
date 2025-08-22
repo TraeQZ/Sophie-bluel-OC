@@ -62,11 +62,15 @@ function loadCategories() {
   option.text = "";
   CATEGORIES_SELECT.add(option); // AJOUT CATEGORIE VIDE ( 1er ligne) DANS LE FORMULAIRE
 
+  //Récupère les catégories depuis l'API et les ajoute à un menu déroulant (select).
+  // 1. Lance une requête HTTP pour récupérer les données de l'API des catégories.
+
   fetch(CATEGORY_API)
-    .then((reponse) => reponse.json())
+    .then((reponse) => reponse.json()) // 2. Convertit la réponse en un objet JSON.
     .then((categories) => {
       for (let category of categories) {
-        let option = document.createElement("option");
+        // Crée un nouvel élément <option> pour le menu déroulant.
+        let option = document.createElement("option"); // Assigne la valeur (l'ID de la catégorie) et le texte (le nom de la catégorie) à l'option.
         option.value = category.id;
         option.text = category.name;
         CATEGORIES_SELECT.add(option);
@@ -98,6 +102,7 @@ const ADD_WORK_TO_API = function () {
   formData.append("category", CATEGORIES_SELECT.value);
 
   fetch(WORKS_API, {
+    // appel les travaux via l'api
     method: "POST",
     headers: {
       Accept: "*/*",
@@ -192,7 +197,10 @@ INPUT_PICTURE.addEventListener("change", function () {
       return; // Arrête l'exécution de la fonction
     }
     // Affiche la prévisualisation de l'image
-    const reader = new FileReader();
+    const reader = new FileReader(); // Crée un nouvel objet 'FileReader' pour lire le contenu d'un fichier.
+    // Définit la fonction à exécuter lorsque le fichier est lu avec succès.
+    // L'événement 'onload' se déclenche une fois la lecture terminée.
+
     reader.onload = function (e) {
       PICTURE_PREVIEW.src = e.target.result;
       PICTURE_PREVIEW.style.display = "block";
