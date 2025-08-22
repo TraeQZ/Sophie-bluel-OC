@@ -40,6 +40,12 @@ function fetchWorks(showWorkOnModal) {
 }
 
 function updateWorks(showWorkOnModal) {
+  // Add a check to ensure workList is defined
+  if (!workList) {
+    console.error("workList is not defined when updateWorks was called.");
+    return; // Exit the function if workList is undefined
+  }
+
   let gallery = getWorksGallery(showWorkOnModal);
   gallery.innerHTML = "";
   for (let i = 0; i < workList.length; i++) {
