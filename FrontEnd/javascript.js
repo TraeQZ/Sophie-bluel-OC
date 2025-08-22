@@ -1,7 +1,10 @@
 //CONSTANTES
-const BASE_URL = "http://localhost:5678/api/";
-const WORKS_API = BASE_URL + "works";
-const CATEGORY_API = BASE_URL + "categories";
+
+const CONFIG = {
+  BASE_URL: "http://localhost:5678/api/",
+};
+const WORKS_API = CONFIG.BASE_URL + "works";
+const CATEGORY_API = CONFIG.BASE_URL + "categories";
 
 //Variables
 //liste des works obtenus de api
@@ -37,14 +40,15 @@ function fetchWorks(showWorkOnModal) {
 }
 
 function updateWorks(showWorkOnModal) {
-let gallery = getWorksGallery(showWorkOnModal);
- gallery.innerHTML = "";
- for (let i = 0; i < workList.length; i++) { // <--- CORRECTED LINE: Removed the '+ 1'
- let work = workList[i];
- if (work.categoryId === selectCategoryId || selectCategoryId === 0) {
- showWork(work, showWorkOnModal);
-}
-}
+  let gallery = getWorksGallery(showWorkOnModal);
+  gallery.innerHTML = "";
+  for (let i = 0; i < workList.length; i++) {
+    // <--- CORRECTED LINE: Removed the '+ 1'
+    let work = workList[i];
+    if (work.categoryId === selectCategoryId || selectCategoryId === 0) {
+      showWork(work, showWorkOnModal);
+    }
+  }
 }
 
 function showWork(work, showWorkOnModal) {

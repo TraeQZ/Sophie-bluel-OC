@@ -156,21 +156,40 @@ BUTTON_BACK.addEventListener("click", function () {
 //Ajouter une photo
 
 BUTTON_ADD_PHOTO.addEventListener("click", function () {
- INPUT_PICTURE.click();
+  INPUT_PICTURE.click();
 });
 
-// SELECTEUR FICHIER PHOTO:Cet événement se déclenche lorsqu'un fichier a été sélectionné 
+// SELECTEUR FICHIER PHOTO:Cet événement se déclenche lorsqu'un fichier a été sélectionné
 INPUT_PICTURE.addEventListener("change", function () {
- if (this.files[0].size > 4194304)// 4194304 octets = 4 Mo
- {alert("Fichier trop volumineux");
-this.value = "";
-}
-if (this.files[0]) {
- PICTURE_PREVIEW.style.display = "block";
-}
+  if (this.files[0].size > 4194304) {
+    // 4194304 octets = 4 Mo
+    alert("Fichier trop volumineux");
+    this.value = "";
+  }
+  if (this.files[0]) {
+    PICTURE_PREVIEW.style.display = "block";
+    PICTURE_SELECTION.style.display = "none";
+  }
 });
+
+//ajouter des change listner sur tt les input pr verifier et changer l'etat de bouton valider
 
 INPUT_PICTURE.addEventListener("change", VERIFICATION);
+CATEGORIES_SELECT.addEventListener("change", VERIFICATION);
+TITLE_NEW_PHOTO.addEventListener("change", VERIFICATION);
 
+// SELECTEUR FICHIER PHOTO: Cet événement se déclenche lorsqu'un fichier a été sélectionné
+INPUT_PICTURE.addEventListener("change", function () {
+  const file = this.files[0];
 
-
+  if (file) {
+    // Vérification de la taille du fichier (4 Mo)
+    if (file.size > 4194304) {
+      alert("Fichier trop volumineux");
+      this.value = ""; // Réinitialise l'input
+      resetPhotoSelection(); // Réinitialise l'affichage
+      VERIFICATION(); // Vérifie l'état du bouton
+      return; // Arrête l'exécution de la fonction
+    }
+  }
+});
