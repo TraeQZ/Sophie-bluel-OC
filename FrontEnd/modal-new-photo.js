@@ -191,5 +191,18 @@ INPUT_PICTURE.addEventListener("change", function () {
       VERIFICATION(); // Vérifie l'état du bouton
       return; // Arrête l'exécution de la fonction
     }
+    // Affiche la prévisualisation de l'image
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      PICTURE_PREVIEW.src = e.target.result;
+      PICTURE_PREVIEW.style.display = "block";
+      PICTURE_SELECTION.style.display = "none";
+    };
+    reader.readAsDataURL(file);
+  } else {
+    // Si l'utilisateur annule la sélection
+    resetPhotoSelection();
   }
+
+  VERIFICATION(); // Appelle la fonction de vérification
 });
